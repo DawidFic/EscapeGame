@@ -7,14 +7,6 @@ public class Map {
             }
         }
     }
-    public static void printCompass(Player player)
-    {
-        System.out.println(ConsoleColours.CYAN_BOLD_BRIGHT+"  N  "+ConsoleColours.RESET );
-        System.out.println("  |  ");
-        System.out.println("W-o-E");
-        System.out.println("  |  ");
-        System.out.println("  S  \n");
-    }
 
     public static void printMap(char[][] map, Player player) {
         System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+---------------------+"+ ConsoleColours.RESET);
