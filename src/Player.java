@@ -1,14 +1,19 @@
+import java.util.Random;
+
 public class Player {
-    int x, y, maxX, maxY;
+    int x, y, maxX, maxY, lastX, lastY, score, hp, game, rndNumber;
     char playerSymbol;
 
+    Random random = new Random();
 
-    public Player(int x, int y, int maxX, int maxY, char playerSymbol){
+    public Player(int x, int y, int maxX, int maxY, char playerSymbol, int score, int hp){
         this.x = x;
         this.y = y;
         this.maxX = maxX-1;
         this.maxY = maxY-1;
         this.playerSymbol = playerSymbol;
+        this.score = score;
+        this.hp = hp;
     }
 
     public void playerMove(char move) {
@@ -32,14 +37,68 @@ public class Player {
         }
     }
 
+    private boolean checkLastDig()
+    {
+        if (x == lastX && y == lastY) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     public int playerDig(int escapeX, int escapeY) {
         if(x == escapeX && y == escapeY) {
             System.out.println(ConsoleColours.GREEN_BOLD_BRIGHT+"SUCCESS YOU HAVE MANGED TO ESCAPE!!");
-            return 0;
+            System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT+"SCORE: "+ConsoleColours.RED_BOLD_BRIGHT+getScore()+ConsoleColours.RESET);
+            this.game = 0;
         } else {
-            System.out.println(ConsoleColours.RED_BOLD_BRIGHT+"NOTHING TO BE FOUND HERE");
-            return 1;
+            rndNumber = random.nextInt(100);
+            if(rndNumber <= 10) { //JEWEL
+                if (checkLastDig() == false) {
+                    score += 100;
+                    System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.PURPLE_BOLD_BRIGHT + "RARE JEWEL " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "100 POINTS!" + ConsoleColours.RESET);
+                    game = 1;
+                    lastX = x;
+                    lastY = y;
+                } else {
+                    rndNumber = 62; //GO TO NOTHING
+                }
+            } else if (rndNumber >= 11 && rndNumber <= 20) { //ROLEX
+                if (checkLastDig() == false) {
+                    score += 70;
+                    System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.YELLOW_BOLD_BRIGHT + "ROLEX " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "70 POINTS!" + ConsoleColours.RESET);
+                    game = 1;
+                    lastX = x;
+                    lastY = y;
+                } else {
+                    rndNumber = 62; //GO TO NOTHING
+                }
+            } else if (rndNumber >= 21 && rndNumber <=35) { //ANCIENT RELIC
+                if (checkLastDig() == false) {
+                    score += 30;
+                    System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.GREEN_BOLD_BRIGHT + "ANCIENT RELIC " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "30 POINTS!" + ConsoleColours.RESET);
+                    game = 1;
+                    lastX = x;
+                    lastY = y;
+                } else {
+                    rndNumber = 62; //GO TO NOTHING
+                }
+            } else if (rndNumber >= 36 && rndNumber<=60) { //BOMB
+                if (checkLastDig() == false) {
+                    score -= 100;
+                    hp -= 20;
+                    System.out.println(ConsoleColours.RED_BOLD_BRIGHT + "YOU SET OFF A BOMB, YOU HAVE LOST 100 POINTS AND 20HP" + ConsoleColours.RESET);
+                    game = 1;
+                } else {
+                    rndNumber = 62; //GO TO NOTHING
+                }
+            } else if (rndNumber >=61 && rndNumber<=100) { //NOTHING
+                score -= 10;
+                System.out.println(ConsoleColours.RED_BOLD_BRIGHT+"NOTHING TO BE FOUND HERE"+ConsoleColours.RESET);
+                game = 1;
+            }
         }
+        return game;
     }
 
     private void checkXBounds() {
@@ -96,5 +155,13 @@ public class Player {
 
     public void setMaxY(int maxY) {
         this.maxY = maxY;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
+    public void setScore(int score) {
+        this.score = score;
     }
 }

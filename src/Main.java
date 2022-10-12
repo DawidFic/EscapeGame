@@ -8,7 +8,7 @@ public class Main {
     public static void main(String[] args) {
         char[][] grid = new char[11][21];
         Map gameMap = new Map(rdm.nextInt(grid.length), (rdm.nextInt(grid[0].length)));
-        Player player = new Player(rdm.nextInt(grid.length), rdm.nextInt(grid[0].length), grid.length, grid[0].length,'@');
+        Player player = new Player(rdm.nextInt(grid.length), rdm.nextInt(grid[0].length), grid.length, grid[0].length,'@', 0, 100);
         Compass compass = new Compass(gameMap.getEscapeX(), gameMap.getEscapeY());
         char move;
         int game = 1;
@@ -19,6 +19,7 @@ public class Main {
         while(game == 1) {
             gameMap.fillMap(grid);
             gameMap.printMap(grid, player);
+            System.out.println(ConsoleColours.WHITE_BRIGHT + "PLAYER SCORE:" + ConsoleColours.GREEN_BRIGHT +player.getScore()+ConsoleColours.RESET);
             //System.out.println("X: "+player.getX()+" Y: "+player.getY());
             //System.out.println("Escape X: "+gameMap.getEscapeX()+" Escape Y: "+gameMap.getEscapeY());
             compass.drawCompass(player.getX(), player.getY());

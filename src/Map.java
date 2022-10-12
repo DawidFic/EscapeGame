@@ -22,7 +22,7 @@ public class Map {
             }
             System.out.println(ConsoleColours.RED_BOLD_BRIGHT + "|" + ConsoleColours.RESET);
         }
-        System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+---------------------+\n"+ ConsoleColours.RESET);
+        System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+---------------------+"+ ConsoleColours.RESET);
     }
 
     public int getEscapeX() {
