@@ -16,10 +16,11 @@ public class Main {
         gameMap.fillMap(grid);
 
         //game loop
-        while(game == 1) {
+        while(game == 1 ) {
             gameMap.fillMap(grid);
             gameMap.printMap(grid, player);
             System.out.println(ConsoleColours.WHITE_BRIGHT + "PLAYER SCORE:" + ConsoleColours.GREEN_BRIGHT +player.getScore()+ConsoleColours.RESET);
+            System.out.println(ConsoleColours.WHITE_BRIGHT + "PLAYER HEALTH:" + ConsoleColours.GREEN_BRIGHT +player.getHp()+ConsoleColours.RESET);
             //System.out.println("X: "+player.getX()+" Y: "+player.getY());
             //System.out.println("Escape X: "+gameMap.getEscapeX()+" Escape Y: "+gameMap.getEscapeY());
             compass.drawCompass(player.getX(), player.getY());
@@ -31,10 +32,12 @@ public class Main {
             System.out.println(ConsoleColours.WHITE_BRIGHT + "X:" + ConsoleColours.YELLOW_BRIGHT + " DIG" + ConsoleColours.RESET);
             move = scanner.next().charAt(0);
             move = Character.toUpperCase(move);
-            if(move != 'X') {
+            if(move != 'X' && player.getHp() > 0) {
                 player.playerMove(move);
-            } else {
+            } else if(player.getHp() > 0){
                 game = player.playerDig(gameMap.getEscapeX(), gameMap.getEscapeY());
+            } else {
+                game = 0;
             }
         }
     }

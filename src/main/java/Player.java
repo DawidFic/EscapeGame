@@ -36,6 +36,7 @@ public class Player {
                 checkYBounds();
                 break;
         }
+        playerMove = true;
     }
 
     private void checkPlayerMove()
@@ -47,21 +48,50 @@ public class Player {
         }
     }
 
+    private void updateLastMove()
+    {
+        this.lastX = x;
+        this.lastY = y;
+    }
+
     public int playerDig(int escapeX, int escapeY) {
         if (x == escapeX && y == escapeY) {
             System.out.println(ConsoleColours.GREEN_BOLD_BRIGHT + "SUCCESS YOU HAVE MANGED TO ESCAPE!!");
             System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "SCORE: " + ConsoleColours.RED_BOLD_BRIGHT + getScore() + ConsoleColours.RESET);
             this.game = 0;
         } else {
+            System.out.println("PlayerMove = " + playerMove + " lastX = " + lastX + " lastY = " + lastY);
             this.rndNumber = random.nextInt(100);
-            if(this.rndNumber >=0 && this.rndNumber<=50 && this.playerMove) {
-                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.GREEN_BOLD_BRIGHT + "ANCIENT RELIC " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "30 POINTS!" + ConsoleColours.RESET);
-                this.lastX = x;
-                this.lastY = y;
+            if (this.rndNumber >= 0 && this.rndNumber <= 10 && this.playerMove) { //JEWEL
+                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.PURPLE_BOLD_BRIGHT + "JEWEL " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "100 POINTS!" + ConsoleColours.RESET);
+                updateLastMove();
                 checkPlayerMove();
+                score += 100;
                 this.game = 1;
-            } else if(this.rndNumber >=51 && this.rndNumber <=100 || !this.playerMove) {
+            } else if (this.rndNumber >= 11 && this.rndNumber <= 25 && this.playerMove) { //ROLEX
+                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.YELLOW_BOLD_BRIGHT + "ROLEX " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "50 POINTS!" + ConsoleColours.RESET);
+                updateLastMove();
+                checkPlayerMove();
+                score += 50;
+                this.game = 1;
+            } else if (this.rndNumber >= 26 && this.rndNumber <= 40 && this.playerMove) { //ANCIENT RELIC
+                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.GREEN_BOLD_BRIGHT + "ANCIENT RELIC " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "30 POINTS!" + ConsoleColours.RESET);
+                updateLastMove();
+                checkPlayerMove();
+                score += 30;
+                this.game = 1;
+            } else if (this.rndNumber >= 41 && this.rndNumber <= 60 && this.playerMove) { //BOMB
+                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.RED_BOLD_BRIGHT + "BOMB " + ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE LOST: " + ConsoleColours.RED_BOLD_BRIGHT + "100 POINTS" + ConsoleColours.WHITE_BOLD_BRIGHT + " AND " + ConsoleColours.RED_BOLD_BRIGHT + "40 HEALTH" + ConsoleColours.RESET);
+                updateLastMove();
+                checkPlayerMove();
+                score -= 100;
+                hp -= 40;
+                this.game = 1;
+            } else if (this.rndNumber >= 61 && this.rndNumber <= 100 || !this.playerMove) { //NOTHING
                 System.out.println(ConsoleColours.RED_BOLD_BRIGHT + "NOTHING TO BE FOUND HERE" + ConsoleColours.RESET);
+                updateLastMove();
+                checkPlayerMove();
+                score -= 10;
                 this.game = 1;
             }
         }
@@ -130,5 +160,9 @@ public class Player {
 
     public void setScore(int score) {
         this.score = score;
+    }
+
+    public int getHp() {
+        return hp;
     }
 }
