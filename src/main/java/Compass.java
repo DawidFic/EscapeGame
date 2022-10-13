@@ -1,8 +1,7 @@
-import java.io.Console;
-
 public class Compass {
 
-    private int escapeX, escapeY;
+    private int escapeX;
+    private int escapeY;
 
     public void drawCompass(int playerX, int playerY) {
         if(playerX > escapeX && playerY == escapeY) { //NORTH
