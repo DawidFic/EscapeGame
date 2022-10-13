@@ -1,5 +1,5 @@
 public class Map {
-    private int escapeX, escapeY;
+    private final int escapeX, escapeY;
     public static void fillMap(char[][] grid) {
         for (int x = 0; x < grid.length; x++) {
             for (int y = 0; y < grid[0].length; y++) {
@@ -8,7 +8,7 @@ public class Map {
         }
     }
 
-    public static void printMap(char[][] map, Player player) {
+    public void printMap(char[][] map, Player player) {
         System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+---------------------+"+ ConsoleColours.RESET);
         for(int i=0; i<map.length; i++) {
             System.out.print(ConsoleColours.RED_BOLD_BRIGHT + "|" + ConsoleColours.RESET);
@@ -18,7 +18,7 @@ public class Map {
                 } else {
                     System.out.print(ConsoleColours.GREEN + map[i][j]);
 
-                };
+                }
             }
             System.out.println(ConsoleColours.RED_BOLD_BRIGHT + "|" + ConsoleColours.RESET);
         }
@@ -29,16 +29,9 @@ public class Map {
         return escapeX;
     }
 
-    public void setEscapeX(int escapeX) {
-        this.escapeX = escapeX;
-    }
 
     public int getEscapeY() {
         return escapeY;
-    }
-
-    public void setEscapeY(int escapeY) {
-        this.escapeY = escapeY;
     }
 
     public Map(int escapeX, int escapeY) {

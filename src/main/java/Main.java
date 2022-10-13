@@ -13,7 +13,7 @@ public class Main {
         char move;
         int game = 1;
 
-        gameMap.fillMap(grid);
+        Map.fillMap(grid);
 
         //game loop
         while(game == 1 ) {
