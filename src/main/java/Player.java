@@ -19,33 +19,29 @@ public class Player {
 
     public void playerMove(char move) {
         switch (move) {
-            case 'W':
+            case 'W' -> {
                 this.x--;
                 checkXBounds();
-                break;
-            case 'S':
+            }
+            case 'S' -> {
                 this.x++;
                 checkXBounds();
-                break;
-            case 'A':
+            }
+            case 'A' -> {
                 this.y--;
                 checkYBounds();
-                break;
-            case 'D':
+            }
+            case 'D' -> {
                 this.y++;
                 checkYBounds();
-                break;
+            }
         }
         playerMove = true;
     }
 
     private void checkPlayerMove()
     {
-        if (x == lastX && y == lastY) {
-            playerMove = false;
-        } else {
-            playerMove = true;
-        }
+        playerMove = x != lastX || y != lastY;
     }
 
     private void updateLastMove()
@@ -60,7 +56,6 @@ public class Player {
             System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "SCORE: " + ConsoleColours.RED_BOLD_BRIGHT + getScore() + ConsoleColours.RESET);
             this.game = 0;
         } else {
-            System.out.println("PlayerMove = " + playerMove + " lastX = " + lastX + " lastY = " + lastY);
             this.rndNumber = random.nextInt(100);
             if (this.rndNumber >= 0 && this.rndNumber <= 10 && this.playerMove) { //JEWEL
                 System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + "YOU HAVE FOUND A " + ConsoleColours.PURPLE_BOLD_BRIGHT + "JEWEL " + ConsoleColours.WHITE_BOLD_BRIGHT + "WORTH: " + ConsoleColours.YELLOW_BOLD_BRIGHT + "100 POINTS!" + ConsoleColours.RESET);
@@ -118,49 +113,18 @@ public class Player {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
     }
-
-    public void setY(int y) {
-        this.y = y;
-    }
-
     public char getPlayerSymbol() {
         return playerSymbol;
     }
 
-    public void setPlayerSymbol(char playerSymbol) {
-        this.playerSymbol = playerSymbol;
-    }
-
-    public int getMaxX() {
-        return maxX;
-    }
-
-    public void setMaxX(int maxX) {
-        this.maxX = maxX;
-    }
-
-    public int getMaxY() {
-        return maxY;
-    }
-
-    public void setMaxY(int maxY) {
-        this.maxY = maxY;
-    }
 
     public int getScore() {
         return score;
     }
 
-    public void setScore(int score) {
-        this.score = score;
-    }
 
     public int getHp() {
         return hp;
