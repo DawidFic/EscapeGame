@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class Main {
     public static final Scanner scanner = new Scanner(System.in);
     public static final Random rdm = new Random();
-
     public static void main(String[] args) {
         char[][] grid = new char[11][21];
         Map gameMap = new Map(rdm.nextInt(grid.length), (rdm.nextInt(grid[0].length)));

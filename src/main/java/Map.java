@@ -24,16 +24,12 @@ public class Map {
         }
         System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+---------------------+"+ ConsoleColours.RESET);
     }
-
     public int getEscapeX() {
         return escapeX;
     }
-
-
     public int getEscapeY() {
         return escapeY;
     }
-
     public Map(int escapeX, int escapeY) {
         this.escapeX = escapeX;
         this.escapeY = escapeY;
