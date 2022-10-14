@@ -5,7 +5,7 @@ public class PlayerTest {
     Player player = new Player(5, 5, 10, 10, '@', 0, 100);
 
     @Test
-    public void testPlayerMove() {
+    public void testMove() {
         int tempX = player.getX();
         int tempY = player.getY();
         player.playerMove('W');
@@ -13,9 +13,9 @@ public class PlayerTest {
         player.playerMove('S');
         Assertions.assertEquals((tempX), player.getX(), "PLAYER HAS NOT MOVED DOWN SUCCESSFULLY");
         player.playerMove('A');
-        Assertions.assertEquals((tempY-1), player.getX(), "PLAYER HAS NOT MOVED LEFT SUCCESSFULLY");
+        Assertions.assertEquals((tempY-1), player.getY(), "PLAYER HAS NOT MOVED LEFT SUCCESSFULLY");
         player.playerMove('D');
-        Assertions.assertEquals((tempY), player.getX(), "PLAYER HAS NOT MOVED RIGHT SUCCESSFULLY");
+        Assertions.assertEquals((tempY), player.getY(), "PLAYER HAS NOT MOVED RIGHT SUCCESSFULLY");
     }
 
     @Test
@@ -61,6 +61,6 @@ public class PlayerTest {
 
         player.setScore(100);
 
-        Assertions.assertEquals(100, player.getPlayerSymbol(), "PLAYER SCORE HAS NOT BEEN CHANGED");
+        Assertions.assertEquals(100, player.getScore(), "PLAYER SCORE HAS NOT BEEN CHANGED");
     }
 }
