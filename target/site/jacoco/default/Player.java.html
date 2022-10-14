@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Player.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">Escaper</a> &gt; <a href="index.source.html" class="el_package">default</a> &gt; <span class="el_source">Player.java</span></div><h1>Player.java</h1><pre class="source lang-java linenums">import java.util.Random;
+
+public class Player {
+    int x;
+    int y;
+    int maxX;
+    int maxY;
+    int lastX;
+    int lastY;
+    int score;
+    int hp;
+    int game;
+    int rndNumber;
+    char playerSymbol;
+<span class="nc" id="L15">    boolean playerMove = true;</span>
+
+<span class="nc" id="L17">    Random random = new Random();</span>
+
+<span class="nc" id="L19">    public Player(int x, int y, int maxX, int maxY, char playerSymbol, int score, int hp){</span>
+<span class="nc" id="L20">        this.x = x;</span>
+<span class="nc" id="L21">        this.y = y;</span>
+<span class="nc" id="L22">        this.maxX = maxX-1;</span>
+<span class="nc" id="L23">        this.maxY = maxY-1;</span>
+<span class="nc" id="L24">        this.playerSymbol = playerSymbol;</span>
+<span class="nc" id="L25">        this.score = score;</span>
+<span class="nc" id="L26">        this.hp = hp;</span>
+<span class="nc" id="L27">    }</span>
+
+    public void playerMove(char move) {
+<span class="nc bnc" id="L30" title="All 5 branches missed.">        switch (move) {</span>
+            case 'W' -&gt; {
+<span class="nc" id="L32">                this.x--;</span>
+<span class="nc" id="L33">                checkXBounds();</span>
+<span class="nc" id="L34">            }</span>
+            case 'S' -&gt; {
+<span class="nc" id="L36">                this.x++;</span>
+<span class="nc" id="L37">                checkXBounds();</span>
+<span class="nc" id="L38">            }</span>
+            case 'A' -&gt; {
+<span class="nc" id="L40">                this.y--;</span>
+<span class="nc" id="L41">                checkYBounds();</span>
+<span class="nc" id="L42">            }</span>
+            case 'D' -&gt; {
+<span class="nc" id="L44">                this.y++;</span>
+<span class="nc" id="L45">                checkYBounds();</span>
+            }
+        }
+<span class="nc" id="L48">        playerMove = true;</span>
+<span class="nc" id="L49">    }</span>
+
+    private void checkPlayerMove()
+    {
+<span class="nc bnc" id="L53" title="All 4 branches missed.">        playerMove = x != lastX || y != lastY;</span>
+<span class="nc" id="L54">    }</span>
+
+    private void updateLastMove()
+    {
+<span class="nc" id="L58">        this.lastX = x;</span>
+<span class="nc" id="L59">        this.lastY = y;</span>
+<span class="nc" id="L60">    }</span>
+
+    public int playerDig(int escapeX, int escapeY) {
+<span class="nc bnc" id="L63" title="All 4 branches missed.">        if (x == escapeX &amp;&amp; y == escapeY) {</span>
+<span class="nc" id="L64">            System.out.println(ConsoleColours.GREEN_BOLD_BRIGHT + &quot;SUCCESS YOU HAVE MANGED TO ESCAPE!!&quot;);</span>
+<span class="nc" id="L65">            System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + &quot;SCORE: &quot; + ConsoleColours.RED_BOLD_BRIGHT + getScore() + ConsoleColours.RESET);</span>
+<span class="nc" id="L66">            this.game = 0;</span>
+        } else {
+<span class="nc" id="L68">            this.rndNumber = random.nextInt(100);</span>
+<span class="nc bnc" id="L69" title="All 6 branches missed.">            if (this.rndNumber &gt;= 0 &amp;&amp; this.rndNumber &lt;= 10 &amp;&amp; this.playerMove) { //JEWEL</span>
+<span class="nc" id="L70">                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + &quot;YOU HAVE FOUND A &quot; + ConsoleColours.PURPLE_BOLD_BRIGHT + &quot;JEWEL &quot; + ConsoleColours.WHITE_BOLD_BRIGHT + &quot;WORTH: &quot; + ConsoleColours.YELLOW_BOLD_BRIGHT + &quot;100 POINTS!&quot; + ConsoleColours.RESET);</span>
+<span class="nc" id="L71">                updateLastMove();</span>
+<span class="nc" id="L72">                checkPlayerMove();</span>
+<span class="nc" id="L73">                score += 100;</span>
+<span class="nc" id="L74">                this.game = 1;</span>
+<span class="nc bnc" id="L75" title="All 6 branches missed.">            } else if (this.rndNumber &gt;= 11 &amp;&amp; this.rndNumber &lt;= 25 &amp;&amp; this.playerMove) { //ROLEX</span>
+<span class="nc" id="L76">                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + &quot;YOU HAVE FOUND A &quot; + ConsoleColours.YELLOW_BOLD_BRIGHT + &quot;ROLEX &quot; + ConsoleColours.WHITE_BOLD_BRIGHT + &quot;WORTH: &quot; + ConsoleColours.YELLOW_BOLD_BRIGHT + &quot;50 POINTS!&quot; + ConsoleColours.RESET);</span>
+<span class="nc" id="L77">                updateLastMove();</span>
+<span class="nc" id="L78">                checkPlayerMove();</span>
+<span class="nc" id="L79">                score += 50;</span>
+<span class="nc" id="L80">                this.game = 1;</span>
+<span class="nc bnc" id="L81" title="All 6 branches missed.">            } else if (this.rndNumber &gt;= 26 &amp;&amp; this.rndNumber &lt;= 40 &amp;&amp; this.playerMove) { //ANCIENT RELIC</span>
+<span class="nc" id="L82">                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + &quot;YOU HAVE FOUND A &quot; + ConsoleColours.GREEN_BOLD_BRIGHT + &quot;ANCIENT RELIC &quot; + ConsoleColours.WHITE_BOLD_BRIGHT + &quot;WORTH: &quot; + ConsoleColours.YELLOW_BOLD_BRIGHT + &quot;30 POINTS!&quot; + ConsoleColours.RESET);</span>
+<span class="nc" id="L83">                updateLastMove();</span>
+<span class="nc" id="L84">                checkPlayerMove();</span>
+<span class="nc" id="L85">                score += 30;</span>
+<span class="nc" id="L86">                this.game = 1;</span>
+<span class="nc bnc" id="L87" title="All 6 branches missed.">            } else if (this.rndNumber &gt;= 41 &amp;&amp; this.rndNumber &lt;= 60 &amp;&amp; this.playerMove) { //BOMB</span>
+<span class="nc" id="L88">                System.out.println(ConsoleColours.WHITE_BOLD_BRIGHT + &quot;YOU HAVE FOUND A &quot; + ConsoleColours.RED_BOLD_BRIGHT + &quot;BOMB &quot; + ConsoleColours.WHITE_BOLD_BRIGHT + &quot;YOU HAVE LOST: &quot; + ConsoleColours.RED_BOLD_BRIGHT + &quot;100 POINTS&quot; + ConsoleColours.WHITE_BOLD_BRIGHT + &quot; AND &quot; + ConsoleColours.RED_BOLD_BRIGHT + &quot;40 HEALTH&quot; + ConsoleColours.RESET);</span>
+<span class="nc" id="L89">                updateLastMove();</span>
+<span class="nc" id="L90">                checkPlayerMove();</span>
+<span class="nc" id="L91">                score -= 100;</span>
+<span class="nc" id="L92">                hp -= 40;</span>
+<span class="nc" id="L93">                this.game = 1;</span>
+<span class="nc bnc" id="L94" title="All 6 branches missed.">            } else if (this.rndNumber &gt;= 61 &amp;&amp; this.rndNumber &lt;= 100 || !this.playerMove) { //NOTHING</span>
+<span class="nc" id="L95">                System.out.println(ConsoleColours.RED_BOLD_BRIGHT + &quot;NOTHING TO BE FOUND HERE&quot; + ConsoleColours.RESET);</span>
+<span class="nc" id="L96">                updateLastMove();</span>
+<span class="nc" id="L97">                checkPlayerMove();</span>
+<span class="nc" id="L98">                score -= 10;</span>
+<span class="nc" id="L99">                this.game = 1;</span>
+            }
+        }
+<span class="nc" id="L102">        return game;</span>
+    }
+
+    private void checkXBounds() {
+<span class="nc bnc" id="L106" title="All 2 branches missed.">        if (this.x &lt; 0) {</span>
+<span class="nc" id="L107">            this.x = this.maxX;</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        } else if (this.x &gt; this.maxX) {</span>
+<span class="nc" id="L109">            this.x = 0;</span>
+        }
+<span class="nc" id="L111">    }</span>
+
+    private void checkYBounds() {
+<span class="nc bnc" id="L114" title="All 2 branches missed.">        if (this.y &lt; 0) {</span>
+<span class="nc" id="L115">            this.y = this.maxY;</span>
+<span class="nc bnc" id="L116" title="All 2 branches missed.">        } else if (this.y &gt; this.maxY) {</span>
+<span class="nc" id="L117">            this.y = 0;</span>
+        }
+<span class="nc" id="L119">    }</span>
+
+    public void setHp(int hp) {
+<span class="nc" id="L122">        this.hp = hp;</span>
+<span class="nc" id="L123">    }</span>
+
+    public int getX() {
+<span class="nc" id="L126">        return x;</span>
+    }
+
+    public void setX(int x) {
+<span class="nc" id="L130">        this.x = x;</span>
+<span class="nc" id="L131">    }</span>
+
+    public int getY() {
+<span class="nc" id="L134">        return y;</span>
+    }
+
+    public void setY(int y) {
+<span class="nc" id="L138">        this.y = y;</span>
+<span class="nc" id="L139">    }</span>
+
+    public char getPlayerSymbol() {
+<span class="nc" id="L142">        return playerSymbol;</span>
+    }
+
+    public void setPlayerSymbol(char playerSymbol) {
+<span class="nc" id="L146">        this.playerSymbol = playerSymbol;</span>
+<span class="nc" id="L147">    }</span>
+
+    public int getScore() {
+<span class="nc" id="L150">        return score;</span>
+    }
+
+    public void setScore(int score) {
+<span class="nc" id="L154">        this.score = score;</span>
+<span class="nc" id="L155">    }</span>
+
+    public int getHp() {
+<span class="nc" id="L158">        return hp;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -9,7 +9,7 @@ public class Map {
     }
 
     public void printMap(char[][] map, Player player) {
-        System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+---------------------+"+ ConsoleColours.RESET);
+        System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+-------------------------------+"+ ConsoleColours.RESET);
         for(int i=0; i<map.length; i++) {
             System.out.print(ConsoleColours.RED_BOLD_BRIGHT + "|" + ConsoleColours.RESET);
             for(int j=0; j<map[0].length; j++) {
@@ -22,7 +22,7 @@ public class Map {
             }
             System.out.println(ConsoleColours.RED_BOLD_BRIGHT + "|" + ConsoleColours.RESET);
         }
-        System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+---------------------+"+ ConsoleColours.RESET);
+        System.out.println(ConsoleColours.RED_BOLD_BRIGHT +"+-------------------------------+"+ ConsoleColours.RESET);
     }
     public int getEscapeX() {
         return escapeX;

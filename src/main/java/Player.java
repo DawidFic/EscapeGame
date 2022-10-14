@@ -1,7 +1,16 @@
 import java.util.Random;
 
 public class Player {
-    int x, y, maxX, maxY, lastX, lastY, score, hp, game, rndNumber;
+    int x;
+    int y;
+    int maxX;
+    int maxY;
+    int lastX;
+    int lastY;
+    int score;
+    int hp;
+    int game;
+    int rndNumber;
     char playerSymbol;
     boolean playerMove = true;
 
@@ -109,22 +118,41 @@ public class Player {
         }
     }
 
+    public void setHp(int hp) {
+        this.hp = hp;
+    }
+
     public int getX() {
         return x;
+    }
+
+    public void setX(int x) {
+        this.x = x;
     }
 
     public int getY() {
         return y;
     }
+
+    public void setY(int y) {
+        this.y = y;
+    }
+
     public char getPlayerSymbol() {
         return playerSymbol;
     }
 
+    public void setPlayerSymbol(char playerSymbol) {
+        this.playerSymbol = playerSymbol;
+    }
 
     public int getScore() {
         return score;
     }
 
+    public void setScore(int score) {
+        this.score = score;
+    }
 
     public int getHp() {
         return hp;
